@@ -9,6 +9,6 @@ public class HelloWorldControllerTest {
 	@Test
 	public void devuelveHola() {
 		String h = "1";		
-		assertEquals("1",h);
+		assertEquals("2",h);
 	}
 }
