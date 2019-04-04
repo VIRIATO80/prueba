@@ -13,15 +13,13 @@ node{
 	        scannerHome = tool 'SonarQube_scanner'
 	    }
    
-	    steps {
-	        withSonarQubeEnv('SonarQube_server') {
-	            sh "${scannerHome}/bin/sonar-scanner"
-	        }
-	        timeout(time: 10, unit: 'MINUTES') {
-	            waitForQualityGate abortPipeline: true
-	        }
-	    }
-    }
+        withSonarQubeEnv('SonarQube_server') {
+            sh "${scannerHome}/bin/sonar-scanner"
+        }
+        timeout(time: 10, unit: 'MINUTES') {
+            waitForQualityGate abortPipeline: true
+        }
+   }
    
    stage('Email Notification'){
       mail bcc: '', body: '''Hi Welcome to jenkins email alerts
