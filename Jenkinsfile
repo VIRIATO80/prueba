@@ -10,11 +10,11 @@ node{
    
    stage('SonarQube Analysis') {
 	   	environment {
-	        scannerHome = tool 'SonarQubeScanner'
+	        scannerHome = tool 'SonarQube_scanner'
 	    }
    
 	    steps {
-	        withSonarQubeEnv('Sonarqube') {
+	        withSonarQubeEnv('SonarQube_server') {
 	            sh "${scannerHome}/bin/sonar-scanner"
 	        }
 	        timeout(time: 10, unit: 'MINUTES') {
