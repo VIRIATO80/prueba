@@ -9,10 +9,18 @@ node{
    }
    
    stage('SonarQube Analysis') {
-        def mvnHome =  tool name: 'maven-3', type: 'maven'
-        withSonarQubeEnv('Sonarqube') { 
-          sh "${mvnHome}/bin/mvn sonar:sonar"
-        }
+	   	environment {
+	        scannerHome = tool 'SonarQubeScanner'
+	    }
+   
+	    steps {
+	        withSonarQubeEnv('Sonarqube') {
+	            sh "${scannerHome}/bin/sonar-scanner"
+	        }
+	        timeout(time: 10, unit: 'MINUTES') {
+	            waitForQualityGate abortPipeline: true
+	        }
+	    }
     }
    
    stage('Email Notification'){
