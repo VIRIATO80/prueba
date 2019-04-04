@@ -11,10 +11,7 @@ node{
    stage('SonarQube Analysis') {
    	 def scannerHome = tool 'SonarQube_scanner'
 	 withSonarQubeEnv('SonarQube_server') {
-	    sh "${scannerHome}/bin/sonar-scanner"
-	 }
-	 timeout(time: 10, unit: 'MINUTES') {
-	        waitForQualityGate abortPipeline: true
+	    sh 'mvn clean package sonar:sonar'
 	 }
    }
    
